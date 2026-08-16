@@ -60,3 +60,13 @@ if ("IntersectionObserver" in window && !window.matchMedia("(prefers-reduced-mot
 } else {
   reveals.forEach(element => element.classList.add("is-visible"));
 }
+
+const packFilters = document.querySelectorAll("[data-pack-filter]");
+const packCards = document.querySelectorAll("[data-pack-card]");
+packFilters.forEach(button => button.addEventListener("click", () => {
+  const audience = button.dataset.packFilter;
+  packFilters.forEach(item => item.setAttribute("aria-pressed", String(item === button)));
+  packCards.forEach(card => {
+    card.hidden = audience !== "all" && card.dataset.audience !== audience;
+  });
+}));

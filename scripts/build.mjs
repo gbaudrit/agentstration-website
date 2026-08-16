@@ -52,11 +52,13 @@ function head(lang, page, c) {
   <meta property="og:title" content="${c.title}">
   <meta property="og:description" content="${c.description}">
   <meta property="og:url" content="${url}">
-  <meta property="og:image" content="${site.origin}/social/agentstration-social.svg">
+  <meta property="og:image" content="${site.origin}/og.png">
+  <meta property="og:image:width" content="1792">
+  <meta property="og:image:height" content="896">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="${c.title}">
   <meta name="twitter:description" content="${c.description}">
-  <meta name="twitter:image" content="${site.origin}/social/agentstration-social.svg">
+  <meta name="twitter:image" content="${site.origin}/og.png">
   <link rel="icon" href="/favicon/favicon.svg" type="image/svg+xml">
   <link rel="manifest" href="/site.webmanifest">
   <link rel="stylesheet" href="/assets/site.css">
@@ -69,13 +71,21 @@ function brand(markOnly = false) {
   return `<svg class="brand-mark" viewBox="0 0 48 48" aria-hidden="true"><path class="brand-orbit" d="M24 2.5a21.5 21.5 0 1 1 0 43 21.5 21.5 0 0 1 0-43Z"/><path class="brand-orbit brand-orbit-inner" d="M24 8a16 16 0 1 1 0 32 16 16 0 0 1 0-32Z"/><circle cx="24" cy="2.5" r="2.2"/><circle cx="42.7" cy="13.3" r="2.2"/><circle cx="5.3" cy="34.7" r="2.2"/><path class="brand-a" d="M12.8 34.5 22.1 15c.8-1.7 3.1-1.7 4 0l9.2 19.5-7.9-6.2-3.3-7.4-3.5 7.4-7.8 6.2Z"/><path class="brand-a brand-a-tail" d="m16.8 36.2 7.2-6 7.2 6-7.2-3.1-7.2 3.1Z"/></svg>${markOnly ? "" : '<span class="wordmark">AGENTSTRATION</span>'}`;
 }
 
+function headerBrand() {
+  return `<img class="header-lockup" src="/logos/agentstration-header-lockup.png" width="1224" height="222" alt="Agentstration">`;
+}
+
+function footerBrand() {
+  return `<img class="footer-lockup" src="/logos/agentstration-header-lockup.png" width="1224" height="222" alt="Agentstration">`;
+}
+
 function header(lang, page, c) {
   const other = lang === "en" ? "fr" : "en";
   return `<body>
 <a class="skip-link" href="#main">${c.skip}</a>
 <header class="site-header" data-header>
   <div class="container nav-shell">
-    <a class="brand" href="${pathFor(lang, "home")}" aria-label="Agentstration — ${c.nav.home}">${brand()}</a>
+    <a class="brand header-brand" href="${pathFor(lang, "home")}" aria-label="Agentstration — ${c.nav.home}">${headerBrand()}</a>
     <nav class="desktop-nav" aria-label="${c.navLabel}">
       ${site.pages.map(key => `<a href="${pathFor(lang, key)}"${key === page ? ' aria-current="page"' : ""}>${c.nav[key]}</a>`).join("")}
     </nav>
@@ -96,9 +106,9 @@ function header(lang, page, c) {
 function footer(lang, c) {
   return `<footer class="site-footer">
   <div class="container footer-grid">
-    <div><a class="brand footer-brand" href="${pathFor(lang, "home")}">${brand()}</a><p>${c.footer.statement}</p></div>
+    <div><a class="footer-brand" href="${pathFor(lang, "home")}" aria-label="Agentstration — ${c.nav.home}">${footerBrand()}</a><p>${c.footer.statement}</p></div>
     <div><h2>${c.footer.product}</h2>${site.pages.slice(1).map(key => `<a href="${pathFor(lang, key)}">${c.nav[key]}</a>`).join("")}</div>
-    <div><h2>${c.footer.resources}</h2>${linkOrDisabled(site.externalLinks.docs, c.footer.documentation, c.footer.comingSoon, "footer-link")}${linkOrDisabled(site.externalLinks.github, c.footer.github, c.footer.comingSoon, "footer-link")}</div>
+    <div><h2>${c.footer.resources}</h2>${linkOrDisabled(site.externalLinks.docs, c.footer.documentation, c.footer.comingSoon, "footer-link")}${linkOrDisabled(site.externalLinks.github, c.footer.github, c.footer.comingSoon, "footer-link")}${linkOrDisabled(site.externalLinks.packs, c.footer.packs, c.footer.comingSoon, "footer-link")}</div>
   </div>
   <div class="container footer-bottom"><span>© ${new Date().getFullYear()} Agentstration. ${c.footer.legal}</span><span>${c.footer.built}</span></div>
 </footer>
@@ -121,18 +131,41 @@ function architectureGraphic(lang) {
   </div>`;
 }
 
+function productPreview(lang, index) {
+  const isFr = lang === "fr";
+  if (index === 0) {
+    return `<div class="product-shot console-shot" aria-label="${isFr ? "Aperçu de la Console d’opérations" : "Operations Console preview"}" role="img">
+      <div class="shot-sidebar"><span class="shot-logo">A</span><i></i><i></i><i></i><i></i></div>
+      <div class="shot-content"><div class="shot-topline"><span>${isFr ? "Plan de contrôle" : "Control plane"}</span><b>● ${isFr ? "Opérationnel" : "Operational"}</b></div>
+      <div class="shot-title">${isFr ? "Agents & exécutions" : "Agents & runs"}</div>
+      <div class="shot-metrics"><span><b>12</b>${isFr ? "Ressources" : "Resources"}</span><span><b>04</b>Flows</span><span><b>08</b>${isFr ? "Exécutions" : "Runs"}</span></div>
+      <div class="shot-rows"><span><i></i>sql-expert <b>Ready</b></span><span><i></i>content-analyst <b>Ready</b></span><span><i></i>support-router <b>Draft</b></span></div></div>
+    </div>`;
+  }
+  return `<div class="product-shot workplace-shot" aria-label="${isFr ? "Aperçu du Workplace utilisateur" : "End-user Workplace preview"}" role="img">
+    <div class="workplace-head"><span class="shot-logo">A</span><span>Workplace</span><i></i></div>
+    <div class="workplace-body"><p>${isFr ? "Que voulez-vous accomplir ?" : "What do you want to accomplish?"}</p>
+    <div class="workplace-prompt">${isFr ? "Analyse les risques de ce changement et prépare une synthèse." : "Review this change for risks and prepare a concise brief."}<span>↑</span></div>
+    <div class="workplace-flow"><span>01 ${isFr ? "Demande reçue" : "Request received"}</span><span>02 Flow</span><span>03 ${isFr ? "Résultat durable" : "Durable result"}</span></div></div>
+  </div>`;
+}
+
 function renderHome(lang, c) {
   return `<main id="main">
-  <section class="hero section-grid"><div class="hero-orbit" aria-hidden="true"><i></i><i></i><i></i></div><div class="container hero-grid">
-    <div class="hero-copy"><p class="eyebrow reveal">${c.hero.kicker}</p><h1 class="reveal">${c.hero.title}</h1><p class="lede reveal">${c.hero.body}</p><div class="hero-actions reveal"><a class="button primary" href="${pathFor(lang, "features")}">${c.hero.primary}</a><a class="button secondary" href="${pathFor(lang, "architecture")}">${c.hero.secondary}</a></div><ul class="proof-list reveal">${c.hero.proof.map(x => `<li>${x}</li>`).join("")}</ul></div>
-    <div class="hero-visual reveal"><div class="hero-mark">${brand(true)}</div><div class="orbit-label orbit-label-a">DEFINE</div><div class="orbit-label orbit-label-b">ORCHESTRATE</div><div class="orbit-label orbit-label-c">OPERATE</div></div>
+  <section class="hero section-grid"><div class="container hero-grid">
+    <div class="hero-copy"><p class="eyebrow reveal">${c.hero.kicker}</p><h1 class="reveal">${c.hero.title}</h1><p class="lede reveal">${c.hero.body}</p><div class="hero-actions reveal"><a class="button primary" href="${pathFor(lang, "features")}">${c.hero.primary}</a><a class="button secondary github-button" href="${site.externalLinks.github}" target="_blank" rel="noreferrer">${c.hero.secondary}<span aria-hidden="true">↗</span></a></div><ul class="proof-list reveal">${c.hero.proof.map(x => `<li>${x}</li>`).join("")}</ul></div>
+    <div class="hero-visual reveal"><div class="hero-image-shell"><img src="/media/agentstration-orbit.png" width="516" height="503" alt="${lang === "fr" ? "Emblème orbital Agentstration" : "Agentstration orbital emblem"}"></div></div>
   </div></section>
-  <section class="section problem"><div class="container"><div class="section-heading split"><div><p class="eyebrow">${c.problem.kicker}</p><h2>${c.problem.title}</h2></div><p>${c.problem.body}</p></div><div class="number-grid">${c.problem.stats.map(x => `<article class="number-card reveal"><span>${x[0]}</span><h3>${x[1]}</h3><p>${x[2]}</p></article>`).join("")}</div></div></section>
-  <section class="section surface-section"><div class="container"><div class="section-heading"><p class="eyebrow">${c.blocks.kicker}</p><h2>${c.blocks.title}</h2><p>${c.blocks.body}</p></div><div class="feature-grid">${c.blocks.items.map(x => `<article class="feature-card reveal"><div class="icon-box">${icon(x[0])}</div><h3>${x[1]}</h3><p>${x[2]}</p><span class="card-index">0${c.blocks.items.indexOf(x) + 1}</span></article>`).join("")}</div></div></section>
+  <section class="signal-strip" aria-label="${lang === "fr" ? "Fondations produit" : "Product foundations"}"><div class="container signal-grid"><span>${lang === "fr" ? "Ressources déclaratives" : "Declarative resources"}</span><span>${lang === "fr" ? "Flows versionnés" : "Versioned flows"}</span><span>${lang === "fr" ? "Exécutions durables" : "Durable runs"}</span><span class="runtime-signal">${lang === "fr" ? "Runtime d’agents · MAF" : "Agent runtime · MAF"}</span></div></section>
+  <section class="section problem"><div class="container"><div class="section-heading split"><div><p class="eyebrow">${c.problem.kicker}</p><h2>${c.problem.title}</h2></div><p>${c.problem.body}</p></div><div class="number-grid">${c.problem.stats.map(x => `<article class="number-card reveal"><h3>${x[1]}</h3><p>${x[2]}</p></article>`).join("")}</div></div></section>
+  <section class="section runtime-section"><div class="container runtime-grid"><div class="runtime-copy"><p class="eyebrow">${c.runtime.kicker}</p><h2>${c.runtime.title}</h2><p>${c.runtime.body}</p><div class="runtime-current"><span>${c.runtime.label}</span><a class="runtime-doc-link" href="${site.externalLinks.maf}" target="_blank" rel="noreferrer"><strong>${c.runtime.name}</strong><span>${lang === "fr" ? "Documentation officielle" : "Official documentation"} <i aria-hidden="true">↗</i></span></a><small>MAF</small></div></div><div class="runtime-diagram reveal" role="img" aria-label="Agentstration Runtime Plane connected to Microsoft Agent Framework"><div class="runtime-plane-card"><span>AGENTSTRATION</span><strong>Runtime Plane</strong><small>${lang === "fr" ? "Résolution · cycle de vie · observabilité" : "Resolution · lifecycle · observability"}</small></div><div class="runtime-bridge"><i></i><span>${lang === "fr" ? "ADAPTATEUR RUNTIME" : "RUNTIME ADAPTER"}</span><i></i></div><div class="maf-card"><span>MICROSOFT</span><strong>Agent Framework</strong><small>${lang === "fr" ? "Runtime d’agents intégré actuellement" : "Currently integrated agent runtime"}</small></div><div class="runtime-points">${c.runtime.points.map(x => `<div><p><strong>${x[0]}</strong>${x[1]}</p></div>`).join("")}</div></div></div></section>
+  <section class="section provider-section"><div class="container provider-grid"><div class="provider-copy"><p class="eyebrow">${c.providers.kicker}</p><h2>${c.providers.title}</h2><p>${c.providers.body}</p><div class="provider-current"><div class="provider-current-head"><span>${c.providers.current}</span><strong>${c.providers.name}</strong><i aria-hidden="true">●</i></div><p>${c.providers.detail}</p><small>AEP · MODEL PROVIDER</small></div><p class="provider-future">${c.providers.future}</p></div><div class="provider-path reveal" role="img" aria-label="${lang === "fr" ? "Chemin d’un fournisseur de modèles vers une définition d’agent" : "Model provider path to an agent definition"}">${c.providers.stages.map((stage, index) => `<div class="provider-stage"><strong>${stage[0]}</strong><small>${stage[1]}</small></div>${index < c.providers.stages.length - 1 ? '<div class="provider-connector"><i></i><b>→</b></div>' : ""}`).join("")}</div></div></section>
+  <section class="section surface-section"><div class="container"><div class="section-heading"><p class="eyebrow">${c.blocks.kicker}</p><h2>${c.blocks.title}</h2><p>${c.blocks.body}</p></div><div class="feature-grid">${c.blocks.items.map(x => `<article class="feature-card reveal"><div class="icon-box">${icon(x[0])}</div><h3>${x[1]}</h3><p>${x[2]}</p></article>`).join("")}</div></div></section>
+  <section class="section ecosystem-section"><div class="container ecosystem-grid"><div class="ecosystem-copy"><p class="eyebrow">${lang === "fr" ? "Un plan de contrôle, tout l’écosystème" : "One control plane, the whole ecosystem"}</p><h2>${lang === "fr" ? "Donnez une architecture au travail agentique." : "Give agentic work an architecture."}</h2><p>${lang === "fr" ? "Agentstration relie agents, fournisseurs de modèles, outils, extensions et surfaces utilisateurs sans les enfermer dans un même processus ni dans un cloud imposé." : "Agentstration connects agents, model providers, tools, extensions and user surfaces without locking them into one process or a mandatory cloud."}</p><div class="ecosystem-tags"><span>Agents</span><span>Flows</span><span>Tools</span><span>Models</span><span>Work</span><span>AEP</span></div></div><figure class="ecosystem-visual reveal"><img src="/media/agentstration-ecosystem.png" width="1280" height="1280" loading="lazy" alt="${lang === "fr" ? "Agentstration au centre d’un écosystème de capacités connectées" : "Agentstration at the center of a connected capability ecosystem"}"></figure></div></section>
   <section class="section local-section"><div class="container local-grid"><div class="local-copy"><p class="eyebrow">${c.local.kicker}</p><h2>${c.local.title}</h2><p>${c.local.body}</p></div><div class="local-points">${c.local.points.map((x, i) => `<div class="local-point reveal"><span>${icon(["workplace","provider","flow","extension"][i])}</span><div><h3>${x[0]}</h3><p>${x[1]}</p></div></div>`).join("")}</div></div></section>
   <section class="section architecture-section"><div class="container architecture-grid"><div><p class="eyebrow">${c.architecture.kicker}</p><h2>${c.architecture.title}</h2><p>${c.architecture.body}</p><a class="arrow-link" href="${pathFor(lang, "architecture")}">${c.architecture.link}<span>→</span></a></div>${architectureGraphic(lang)}</div></section>
-  <section class="section extension-section"><div class="container extension-panel"><div class="protocol-mark reveal"><span>A</span><span>E</span><span>P</span><i>beta</i></div><div><p class="eyebrow">${c.extensions.kicker}</p><h2>${c.extensions.title}</h2><p>${c.extensions.body}</p><a class="arrow-link" href="${pathFor(lang, "extensions")}">${c.extensions.link}<span>→</span></a></div></div></section>
-  <section class="section preview-section"><div class="container"><div class="section-heading split"><div><p class="eyebrow">${c.preview.kicker}</p><h2>${c.preview.title}</h2></div><p>${c.preview.body}</p></div><div class="preview-grid">${c.preview.cards.map((x, i) => `<article class="preview-card reveal"><div class="preview-window"><div class="window-bar"><i></i><i></i><i></i></div><div class="preview-placeholder"><span>${i === 0 ? icon("control") : icon("workplace")}</span><small>${c.preview.placeholder}</small></div></div><h3>${x[0]}</h3><p>${x[1]}</p></article>`).join("")}</div></div></section>
+  <section class="section extension-section"><div class="container extension-panel"><figure class="protocol-mark reveal"><img class="aep-logo-image" src="/logos/agentstration-aep.png" width="1280" height="1280" loading="lazy" alt="AEP — Agentstration Extension Protocol"></figure><div><p class="eyebrow">${c.extensions.kicker}</p><h2>${c.extensions.title}</h2><p>${c.extensions.body}</p><a class="arrow-link" href="${pathFor(lang, "extensions")}">${c.extensions.link}<span>→</span></a></div></div></section>
+  <section class="section preview-section"><div class="container"><div class="section-heading split"><div><p class="eyebrow">${c.preview.kicker}</p><h2>${c.preview.title}</h2></div><p>${c.preview.body}</p></div><div class="preview-grid">${c.preview.cards.map((x, i) => `<article class="preview-card reveal"><div class="preview-window"><div class="window-bar"><i></i><i></i><i></i><small>${i === 0 ? "console.agentstration" : "workplace.agentstration"}</small></div>${productPreview(lang, i)}</div><div class="preview-card-copy"><h3>${x[0]}</h3><p>${x[1]}</p></div></article>`).join("")}</div></div></section>
   ${cta(lang, c)}
   </main>`;
 }
@@ -142,18 +175,53 @@ function renderFeatures(lang, c) {
 }
 
 function renderArchitecture(lang, c) {
-  const headings = lang === "en" ? ["Three planes, one platform", "The path of work", "Architectural boundaries"] : ["Trois plans, une plateforme", "Le parcours du travail", "Frontières architecturales"];
-  return `<main id="main">${pageHero(c.hero)}<section class="section"><div class="container"><div class="section-heading"><p class="eyebrow">01 / ${headings[0]}</p><h2>${headings[0]}</h2></div><div class="plane-grid">${c.planes.map((x,i) => `<article class="plane-card reveal"><span>0${i+1}</span><p>${x[0]}</p><h3>${x[1]}</h3><p>${x[2]}</p></article>`).join("")}</div></div></section><section class="section surface-section"><div class="container architecture-detail"><div><p class="eyebrow">02 / ${headings[1]}</p><h2>${headings[1]}</h2><p>${lang === "en" ? "A request moves down through increasingly focused platform concepts. Results and operational signals return through the same clear boundaries." : "Une demande traverse des concepts de plateforme de plus en plus ciblés. Résultats et signaux opérationnels reviennent par ces mêmes frontières claires."}</p></div>${architectureGraphic(lang)}</div></section><section class="section"><div class="container"><div class="section-heading"><p class="eyebrow">03 / ${headings[2]}</p><h2>${headings[2]}</h2></div><div class="boundary-grid">${c.boundaries.map((x,i) => `<article class="boundary-card reveal"><span>${String(i+1).padStart(2,"0")}</span><h3>${x[0]}</h3><p>${x[1]}</p></article>`).join("")}</div></div></section>${cta(lang,c)}</main>`;
+  const headings = lang === "en" ? ["Four boundaries, one platform", "The path of work", "Architectural boundaries"] : ["Quatre frontières, une plateforme", "Le parcours du travail", "Frontières architecturales"];
+  return `<main id="main">${pageHero(c.hero)}<section class="section"><div class="container"><div class="section-heading"><p class="eyebrow">01 / ${headings[0]}</p><h2>${headings[0]}</h2></div><div class="plane-grid">${c.planes.map(x => `<article class="plane-card reveal"><p>${x[0]}</p><h3>${x[1]}</h3><p>${x[2]}</p></article>`).join("")}</div></div></section><section class="section surface-section"><div class="container architecture-detail"><div><p class="eyebrow">02 / ${headings[1]}</p><h2>${headings[1]}</h2><p>${lang === "en" ? "A request moves down through increasingly focused platform concepts. Results and operational signals return through the same clear boundaries." : "Une demande traverse des concepts de plateforme de plus en plus ciblés. Résultats et signaux opérationnels reviennent par ces mêmes frontières claires."}</p></div>${architectureGraphic(lang)}</div></section><section class="section"><div class="container"><div class="section-heading"><p class="eyebrow">03 / ${headings[2]}</p><h2>${headings[2]}</h2></div><div class="boundary-grid">${c.boundaries.map(x => `<article class="boundary-card reveal"><h3>${x[0]}</h3><p>${x[1]}</p></article>`).join("")}</div></div></section>${cta(lang,c)}</main>`;
 }
 
 function renderExtensions(lang, c) {
-  const heading = lang === "en" ? ["Why the boundary matters", "A possible interaction", "A deliberate shift"] : ["Pourquoi cette frontière compte", "Une interaction possible", "Une évolution délibérée"];
-  return `<main id="main">${pageHero(c.hero)}<section class="section"><div class="container"><div class="section-heading"><p class="eyebrow">01 / AEP</p><h2>${heading[0]}</h2></div><div class="boundary-grid">${c.why.map((x,i) => `<article class="boundary-card reveal"><span>${String(i+1).padStart(2,"0")}</span><h3>${x[0]}</h3><p>${x[1]}</p></article>`).join("")}</div></div></section><section class="section aep-section"><div class="container aep-grid"><div><p class="eyebrow">02 / Agentstration Extension Protocol</p><h2>${c.aep.title}</h2><p>${c.aep.body}</p></div><div class="aep-stages">${c.aep.stages.map((x,i) => `<div class="aep-stage reveal"><span>${String(i+1).padStart(2,"0")}</span><div><h3>${x[0]}</h3><p>${x[1]}</p></div></div>`).join("")}</div></div></section><section class="section"><div class="container"><div class="section-heading"><p class="eyebrow">03 / ${heading[2]}</p><h2>${heading[2]}</h2></div><div class="comparison" role="table">${c.compare.map((row,ri) => `<div class="comparison-row" role="row">${row.map((cell,ci) => `<div role="cell" class="${ci === 0 ? "comparison-title" : ""}">${ci === 0 ? `<span>${ri === 0 ? "×" : "→"}</span>` : ""}${cell}</div>`).join("")}</div>`).join("")}</div></div></section>${cta(lang,c)}</main>`;
+  const heading = lang === "en" ? "What extensions can add" : "Ce que les extensions permettent d’ajouter";
+  return `<main id="main">${pageHero(c.hero)}<section class="section aep-section"><div class="container extension-aep-intro"><figure class="page-aep-mark reveal"><img src="/logos/agentstration-aep.png" width="1280" height="1280" alt="AEP — Agentstration Extension Protocol"></figure><div class="page-aep-content"><p class="eyebrow">Agentstration Extension Protocol</p><h2>${c.aep.title}</h2><p>${c.aep.body}</p><div class="aep-stages">${c.aep.stages.map(x => `<div class="aep-stage reveal"><h3>${x[0]}</h3><p>${x[1]}</p></div>`).join("")}</div></div></div></section><section class="section"><div class="container"><div class="section-heading"><p class="eyebrow">${heading}</p><h2>${heading}</h2></div><div class="boundary-grid">${c.capabilities.map(x => `<article class="boundary-card reveal"><h3>${x[0]}</h3><p>${x[1]}</p></article>`).join("")}</div></div></section>${cta(lang,c)}</main>`;
+}
+
+function packStrategy(lang, strategy) {
+  const labels = {
+    sequential: { en: "Sequential", fr: "Séquentiel" },
+    concurrent: { en: "Concurrent", fr: "Concurrent" },
+    handoff: { en: "Handoff", fr: "Transfert" },
+    "group-chat": { en: "Group chat", fr: "Discussion de groupe" },
+    magentic: { en: "Magentic", fr: "Magentic" }
+  };
+  return labels[strategy]?.[lang] ?? strategy;
+}
+
+function packCard(lang, c, pack) {
+  const source = `${site.externalLinks.packs}/tree/main/packs/samples/${pack.audience}/${pack.name}`;
+  return `<article class="pack-card reveal" data-pack-card data-audience="${pack.audience}">
+    <div class="pack-card-top"><span class="pack-audience ${pack.audience}">${c.gallery[pack.audience]}</span></div>
+    <h2>${pack.displayName}</h2><p>${pack.description}</p>
+    <div class="pack-detail-row"><div class="pack-meta"><span>${packStrategy(lang, pack.strategy)}</span><span>v0.1.0</span><span>${pack.resources} ${c.gallery.resources}</span></div><div class="pack-topology ${pack.strategy}" aria-hidden="true"><i></i><i></i><i></i><i></i><b></b><b></b><b></b><b></b><b></b></div></div>
+    <a class="pack-link" href="${source}" target="_blank" rel="noreferrer">${c.gallery.view}<span aria-hidden="true">↗</span></a>
+  </article>`;
+}
+
+function renderPacks(lang, c) {
+  return `<main id="main">${pageHero(c.hero)}
+  <section class="section pack-gallery-section"><div class="container">
+    <div class="pack-gallery-heading"><div><p class="eyebrow">${c.gallery.kicker}</p><h2>${c.gallery.title}</h2></div><div><p>${c.gallery.body}</p><span class="catalog-source"><i></i>${c.gallery.source}</span></div></div>
+    <div class="pack-toolbar" role="group" aria-label="${lang === "fr" ? "Filtrer les packs par audience" : "Filter packs by audience"}">
+      <button type="button" data-pack-filter="all" aria-pressed="true">${c.gallery.all}<span>${c.items.length}</span></button>
+      <button type="button" data-pack-filter="personal" aria-pressed="false">${c.gallery.personal}<span>${c.items.filter(x => x.audience === "personal").length}</span></button>
+      <button type="button" data-pack-filter="professional" aria-pressed="false">${c.gallery.professional}<span>${c.items.filter(x => x.audience === "professional").length}</span></button>
+    </div>
+    <div class="pack-grid" aria-live="polite">${c.items.map(pack => packCard(lang, c, pack)).join("")}</div>
+    <div class="pack-repository"><div><span>GITHUB / AGENTSTRATION</span><strong>gbaudrit/agentstration-packs</strong></div><a class="button secondary github-button" href="${site.externalLinks.packs}" target="_blank" rel="noreferrer">${c.gallery.repository}<span aria-hidden="true">↗</span></a></div>
+  </div></section>${cta(lang, c)}</main>`;
 }
 
 function renderPage(lang, page) {
   const c = getContent(lang, page);
-  const body = page === "home" ? renderHome(lang, c) : page === "features" ? renderFeatures(lang, c) : page === "architecture" ? renderArchitecture(lang, c) : renderExtensions(lang, c);
+  const body = page === "home" ? renderHome(lang, c) : page === "features" ? renderFeatures(lang, c) : page === "architecture" ? renderArchitecture(lang, c) : page === "extensions" ? renderExtensions(lang, c) : renderPacks(lang, c);
   return `${head(lang, page, c)}${header(lang, page, c)}${body}${footer(lang, c)}`;
 }
 

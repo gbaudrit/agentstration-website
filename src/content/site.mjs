@@ -1,16 +1,19 @@
 export const site = {
   origin: "https://www.agentstrations.io",
   languages: ["en", "fr"],
-  pages: ["home", "features", "architecture", "extensions"],
+  pages: ["home", "features", "architecture", "extensions", "packs"],
   paths: {
     home: "",
     features: "features",
     architecture: "architecture",
-    extensions: "extensions"
+    extensions: "extensions",
+    packs: "packs"
   },
   externalLinks: {
-    github: "",
-    docs: ""
+    github: "https://github.com/gbaudrit/agentstration",
+    docs: "https://github.com/gbaudrit/agentstration/tree/main/docs",
+    maf: "https://learn.microsoft.com/en-us/agent-framework/",
+    packs: "https://github.com/gbaudrit/agentstration-packs"
   }
 };
 
@@ -25,13 +28,14 @@ const shared = {
     languageLabel: "View this page in French",
     theme: "Change color theme",
     eyebrow: "Open agent control plane",
-    nav: { home: "Home", features: "Features", architecture: "Architecture", extensions: "Extensions" },
+    nav: { home: "Home", features: "Features", architecture: "Architecture", extensions: "Extensions", packs: "Packs" },
     footer: {
       statement: "An open control plane for building and operating AI agent systems.",
       product: "Product",
       resources: "Resources",
       documentation: "Documentation",
       github: "GitHub",
+      packs: "Packs repository",
       comingSoon: "Coming soon",
       legal: "Agentstration is an evolving open platform.",
       built: "Designed for local-first, provider-independent systems."
@@ -54,13 +58,14 @@ const shared = {
     languageLabel: "Afficher cette page en anglais",
     theme: "Changer de thème",
     eyebrow: "Plan de contrôle ouvert pour agents",
-    nav: { home: "Accueil", features: "Fonctionnalités", architecture: "Architecture", extensions: "Extensions" },
+    nav: { home: "Accueil", features: "Fonctionnalités", architecture: "Architecture", extensions: "Extensions", packs: "Packs" },
     footer: {
       statement: "Un plan de contrôle ouvert pour construire et opérer des systèmes d’agents IA.",
       product: "Produit",
       resources: "Ressources",
       documentation: "Documentation",
       github: "GitHub",
+      packs: "Dépôt des packs",
       comingSoon: "Bientôt disponible",
       legal: "Agentstration est une plateforme ouverte en évolution.",
       built: "Pensée pour des systèmes local-first et indépendants des fournisseurs."
@@ -75,24 +80,55 @@ const shared = {
   }
 };
 
+const packCatalog = [
+  { name: "daily-life-assistant", displayName: "Daily Life Assistant", audience: "personal", strategy: "handoff", resources: 6, description: { en: "Route an everyday request to the most relevant declared specialist.", fr: "Oriente une demande du quotidien vers le spécialiste déclaré le plus pertinent." } },
+  { name: "event-planner", displayName: "Adaptive Event Planner", audience: "personal", strategy: "magentic", resources: 7, description: { en: "Adaptively coordinate specialists to prepare a small personal event.", fr: "Coordonne des spécialistes de façon adaptative pour préparer un événement personnel." } },
+  { name: "personal-advisor-panel", displayName: "Personal Advisor Panel", audience: "personal", strategy: "concurrent", resources: 5, description: { en: "Collect independent budget, practicality and sustainability perspectives.", fr: "Réunit en parallèle des avis indépendants sur le budget, la faisabilité et la durabilité." } },
+  { name: "personal-decision-guide", displayName: "Personal Decision Guide", audience: "personal", strategy: "sequential", resources: 5, description: { en: "Turn an everyday decision into a clear, balanced recommendation.", fr: "Transforme une décision du quotidien en recommandation claire et équilibrée." } },
+  { name: "weekend-planning-room", displayName: "Weekend Planning Room", audience: "personal", strategy: "group-chat", resources: 6, description: { en: "Build a balanced weekend plan through one bounded shared discussion.", fr: "Construit un programme de week-end équilibré au cours d’une discussion collective cadrée." } },
+  { name: "adaptive-delivery-plan", displayName: "Adaptive Delivery Plan", audience: "professional", strategy: "magentic", resources: 7, description: { en: "Coordinate specialists to build a delivery plan for a complex initiative.", fr: "Coordonne des spécialistes pour construire le plan de livraison d’une initiative complexe." } },
+  { name: "brief-to-spec", displayName: "Brief to Spec", audience: "professional", strategy: "sequential", resources: 5, description: { en: "Turn a product or engineering brief into a reviewed implementation specification.", fr: "Transforme un brief produit ou technique en spécification d’implémentation revue." } },
+  { name: "design-review-room", displayName: "Design Review Room", audience: "professional", strategy: "group-chat", resources: 6, description: { en: "Run a bounded collaborative design review and record a final decision.", fr: "Conduit une revue de conception collaborative cadrée et consigne la décision finale." } },
+  { name: "expert-panel", displayName: "Independent Expert Panel", audience: "professional", strategy: "concurrent", resources: 5, description: { en: "Run independent security, operability and experience reviews.", fr: "Mène en parallèle des revues indépendantes de sécurité, d’opérabilité et d’expérience." } },
+  { name: "smart-support-desk", displayName: "Smart Support Desk", audience: "professional", strategy: "handoff", resources: 6, description: { en: "Qualify a support request and hand it to the appropriate specialist.", fr: "Qualifie une demande de support et la transmet au spécialiste approprié." } }
+];
+
 const pages = {
   en: {
     home: {
       title: "Agentstration — The control plane for AI agents",
       description: "Define, orchestrate and operate AI agents and workflows with an open, local-first control plane.",
       hero: {
-        kicker: "Agent infrastructure, under your control",
-        title: "Turn individual agents into an <em>operable system.</em>",
-        body: "Agentstration is the open control plane for defining, orchestrating, managing and running agents and workflows—locally or across the infrastructure you choose.",
-        primary: "Explore the platform",
-        secondary: "Understand the architecture",
-        proof: ["Local-first", "Provider independent", "Open extension model"]
+        kicker: "Open source · Self-hosted · Built on .NET",
+        title: "Govern. Orchestrate. <em>Run.</em>",
+        body: "Agentstration is the control plane for the work you delegate to AI agents—from declarative configuration and visual flows to durable execution, human interaction and operational visibility.",
+        primary: "Discover the platform",
+        secondary: "View on GitHub",
+        proof: ["Provider-neutral", "Cloud-optional", "Extensible"]
       },
       problem: {
         kicker: "Why Agentstration?",
         title: "The hard part starts after the first agent works.",
         body: "Prototypes are easy to start. Real systems need stable configuration, reusable workflows, governed execution, user-facing workspaces and a clear operational model. Agentstration supplies that missing infrastructure.",
         stats: [["01", "Define once", "Keep agent identity, capabilities and configuration explicit."], ["02", "Compose safely", "Connect agents through flows instead of brittle scripts."], ["03", "Operate clearly", "Separate management concerns from runtime execution."]]
+      },
+      runtime: {
+        kicker: "Agent runtime",
+        title: "A control plane built to execute through a real agent runtime.",
+        body: "Agentstration governs definitions, work and orchestration. Its Runtime Plane materializes agents and delegates their execution to an agent runtime. The current built-in adapter integrates Microsoft Agent Framework (MAF), isolated behind stable, provider-neutral contracts.",
+        label: "Current runtime integration",
+        name: "Microsoft Agent Framework",
+        points: [["Materialize", "Turn governed agent definitions into executable runtime instances."], ["Execute", "Run agents through MAF while keeping provider selection outside the orchestration model."], ["Observe", "Normalize lifecycle events, progress and results back into Agentstration."]]
+      },
+      providers: {
+        kicker: "Model provider integrations",
+        title: "Change models without rewriting your agents.",
+        body: "Agentstration separates provider connectivity, model deployments and reusable model profiles. Agents reference a governed profile—not a vendor endpoint or credential—so infrastructure can evolve independently from orchestration.",
+        current: "Available now",
+        name: "Ollama",
+        detail: "The first implemented provider integration runs out of process as an AEP extension, with model discovery, health checks, streaming, tool calls and usage reporting.",
+        future: "The AEP model-provider contract is the extension point for additional local or hosted providers.",
+        stages: [["Provider", "Connectivity & capabilities"], ["Deployment", "Concrete model"], ["Profile", "Governed defaults"], ["Agent", "Portable definition"]]
       },
       blocks: {
         kicker: "Core building blocks",
@@ -122,15 +158,15 @@ const pages = {
       extensions: {
         kicker: "Extension architecture",
         title: "Integrate through contracts, not hidden coupling.",
-        body: "Agentstration is moving toward AEP—the Agentstration Extension Protocol—so extensions can live outside the main process and communicate through a defined contract. AEP is evolving, but the direction is deliberate: safer boundaries, broader technology choice and independent lifecycles.",
+        body: "AEP—the Agentstration Extension Protocol—is Agentstration’s native extension model. It defines how the platform discovers, connects to and invokes capabilities running outside the main process, with safer boundaries, broader technology choice and independent lifecycles.",
         link: "Discover the extension model"
       },
       preview: {
-        kicker: "Product surfaces",
-        title: "One platform, two focused experiences.",
-        body: "The Console helps operators shape the system. The Workplace gives people a clear place to get work done.",
-        cards: [["Console", "Configure agents, flows, providers and platform resources."], ["Workplace", "Launch tasks, follow progress and review useful results."]],
-        placeholder: "Product preview coming soon"
+        kicker: "Already operational",
+        title: "A real product surface for every role.",
+        body: "Operators govern the platform in the Console. People delegate and follow work in the Workplace. Both share the same durable application services and explicit contracts.",
+        cards: [["Operations Console", "Manage agents, model profiles, tool catalogs, flow versions and runtime runs."], ["End-user Workplace", "Publish entries, delegate work, continue interactions and retrieve durable results."]],
+        placeholder: "Live product surface"
       }
     },
     features: {
@@ -141,55 +177,69 @@ const pages = {
         ["Define", "Model the system deliberately", "Replace scattered prompts and glue code with durable platform concepts.", [["Agents", "Capture purpose, instructions and capabilities as a manageable resource."], ["Providers", "Keep model selection separate from the work agents perform."], ["Resources", "Give configuration a clear home and lifecycle."]]],
         ["Orchestrate", "Turn behavior into repeatable flows", "Compose work visibly so complex outcomes do not depend on opaque application code.", [["Flows", "Coordinate agent steps through explicit, reusable definitions."], ["Inputs and results", "Create a consistent path from a user request to an inspectable outcome."], ["Boundaries", "Keep orchestration concerns separate from agent implementation."]]],
         ["Operate", "Management and runtime, each with a purpose", "Change the platform without blurring configuration and execution.", [["Management plane", "Define, validate and govern the desired system state."], ["Runtime plane", "Execute work through stable runtime contracts."], ["Workplace", "Expose useful workflows without exposing operational complexity."]]],
-        ["Extend", "Connect without surrendering the architecture", "Use provider and extension contracts to evolve one capability at a time.", [["Provider independent", "Choose and change AI providers at the platform boundary."], ["AEP direction", "Move extensions out of process behind an explicit protocol."], ["Open composition", "Bring tools and services into focused integration points."]]]
+        ["Extend", "Connect without surrendering the architecture", "Use provider and extension contracts to evolve one capability at a time.", [["Provider independent", "Choose and change AI providers at the platform boundary."], ["AEP extension model", "Connect out-of-process extensions through Agentstration’s native protocol."], ["Open composition", "Bring tools and services into focused integration points."]]]
       ],
       principles: ["Local-first operation", "Cloud services remain optional", "Small, explicit concepts", "Human and machine-facing surfaces", "Replaceable providers", "Contract-based integrations"]
     },
     architecture: {
       title: "Architecture — Agentstration",
-      description: "Understand the management, runtime and workplace planes behind Agentstration’s open agent architecture.",
-      hero: ["System architecture", "Structure for agents that have to operate in the real world.", "Agentstration separates how a system is defined, how work is experienced and how execution happens—while connecting each plane through explicit contracts."],
-      planes: [["Management plane", "Define the desired system", "Create and govern agents, flows, providers, extensions and their relationships."], ["Experience plane", "Make capability usable", "The Workplace turns platform definitions into a focused, human-facing work environment."], ["Runtime plane", "Execute dependable work", "Resolve definitions, coordinate flows and run agents against providers, tools and extensions."]],
+      description: "Understand the Management, Work, Flow and Runtime boundaries behind Agentstration’s open agent architecture.",
+      hero: ["System architecture", "Structure for agents that have to operate in the real world.", "Agentstration separates governance, delegated work, orchestration and execution—then reconnects them through explicit, provider-neutral contracts."],
+      planes: [["Management plane", "Govern the desired system", "Own declarative agents, model profiles, tool catalogs, deployments and access boundaries."], ["Work plane", "Track delegated work", "Own durable Work Items, interactions, tasks, results and artifacts exposed through the Workplace."], ["Flow plane", "Orchestrate visibly", "Turn editable graph drafts into immutable published versions and observable Flow Runs."], ["Runtime plane", "Execute through an agent runtime", "Materialize and run agents through today’s Microsoft Agent Framework adapter, behind stable contracts."]],
       flow: [["Users", "Start work and consume results"], ["Workplace", "Presents available tasks and progress"], ["Flows", "Coordinate the sequence of work"], ["Agents", "Apply instructions and capabilities"], ["Providers · Tools · Extensions", "Supply models and external capabilities"]],
-      boundaries: [["Definitions over instances", "Management describes what should exist; runtime resolves what a task needs."], ["Contracts over internals", "Planes communicate through intentional interfaces rather than implementation knowledge."], ["Local over mandatory cloud", "The architecture can run locally and adopt remote services selectively."], ["Evolution over lock-in", "Providers and extensions can change without reshaping the whole platform."]]
+      boundaries: [["Declarative by design", "Management owns durable definitions; Runtime materializes them only when work is executed."], ["Explicit boundaries", "Planes exchange stable contracts so each can evolve without depending on another’s internals."], ["Local-first, cloud when useful", "Run the control plane close to your data and add remote services selectively."], ["Replaceable components", "Runtimes, model providers and AEP extensions can evolve without redesigning orchestration."]]
     },
     extensions: {
       title: "Extensions — Agentstration",
-      description: "Discover Agentstration’s evolving contract-based extension architecture and AEP direction.",
-      hero: ["Open extension model", "Capabilities should connect cleanly—and evolve independently.", "Agentstration is designed for extensions that communicate through defined contracts, stay outside the core process and choose the technologies best suited to their job."],
-      why: [["Process isolation", "An extension failure should not have to become a control-plane failure."], ["Independent lifecycle", "Ship, version and operate an integration without rebuilding the platform."], ["Technology freedom", "Implement capabilities in the ecosystem that fits them."], ["Discoverable contracts", "Make supported operations and compatibility explicit."]],
-      aep: { title: "AEP is the direction—not a prematurely frozen standard.", body: "The Agentstration Extension Protocol is the emerging contract between the platform and external extensions. Its public shape is still evolving. The goal is stable interoperability: capability discovery, invocation, lifecycle signals and useful operational boundaries without arbitrary in-process plugin loading.", stages: [["Discover", "An extension describes its identity, version and capabilities."], ["Connect", "The platform establishes a contract-aware communication channel."], ["Invoke", "Runtime work calls a declared capability with structured input."], ["Observe", "Results, failures and health remain visible across the boundary."]] },
-      compare: [["In-process plugin", "Shares memory and failure domain", "Often tied to one runtime", "Platform restart commonly required"], ["Contract extension", "Runs behind a process boundary", "Implementation technology is open", "Can evolve on its own lifecycle"]]
+      description: "Discover AEP, Agentstration’s native contract-based extension model.",
+      hero: ["Native extension model", "Capabilities connect cleanly—and evolve independently.", "AEP—Agentstration Extension Protocol—is Agentstration’s native extension model. It defines how the platform discovers, connects to and invokes capabilities running outside its core process, so each extension retains its own technology, lifecycle and failure boundary."],
+      capabilities: [["Model providers", "Connect local or hosted model runtimes through one contract, with model discovery, chat, streaming and declared capabilities."], ["Tools", "Expose tools and their schemas to Agentstration. AEP tool contributions can rely on MCP for discovery and invocation."], ["Configuration", "Publish versioned configuration schemas and secret annotations without hard-coding provider-specific fields into the platform."], ["Specialized capabilities", "Add namespaced capabilities outside the core process and evolve them on their own lifecycle."]],
+      aep: { title: "AEP is Agentstration’s extension model.", body: "The Agentstration Extension Protocol defines the native contract between the platform and its extension processes. It gives Agentstration a consistent way to discover capabilities, invoke them and observe their lifecycle without loading arbitrary plugins into the core process.", stages: [["Discover", "An extension describes its identity, version and capabilities."], ["Connect", "Agentstration communicates with the extension through the AEP contract."], ["Invoke", "Runtime work calls a declared capability with structured input."], ["Observe", "Results, failures and health remain visible across the boundary."]] }
+    },
+    packs: {
+      title: "Packs Gallery — Agentstration",
+      description: "Explore official, versioned Agentstration Packs for personal and professional agent orchestration.",
+      hero: ["Official pack catalog", "Start with an orchestration you can inspect, run and adapt.", "Packs bundle declarative agents, flows and supporting resources into versioned, installable experiences. The official gallery currently lives in the Agentstration Packs repository."],
+      gallery: { kicker: "10 official samples · 5 orchestration strategies", title: "Choose a starting point, not a blank page.", body: "Browse the current catalog by audience. Every card links to its versioned source in the official repository.", all: "All packs", personal: "Personal", professional: "Professional", resources: "resources", view: "View pack", repository: "Open the packs repository", source: "Git-backed catalog" },
+      items: packCatalog.map(pack => ({ ...pack, description: pack.description.en }))
     }
   },
   fr: {
     home: {
       title: "Agentstration — Le plan de contrôle pour agents IA",
       description: "Définissez, orchestrez et opérez agents IA et workflows grâce à un plan de contrôle ouvert et local-first.",
-      hero: { kicker: "L’infrastructure agentique, sous votre contrôle", title: "Transformez des agents isolés en <em>système opérable.</em>", body: "Agentstration est le plan de contrôle ouvert pour définir, orchestrer, gérer et exécuter agents et workflows — localement ou sur l’infrastructure de votre choix.", primary: "Explorer la plateforme", secondary: "Comprendre l’architecture", proof: ["Local-first", "Indépendant des fournisseurs", "Modèle d’extension ouvert"] },
+      hero: { kicker: "Open source · Auto-hébergé · Construit sur .NET", title: "Gouvernez. Orchestrez. <em>Exécutez.</em>", body: "Agentstration est le plan de contrôle du travail délégué aux agents IA — de la configuration déclarative et des flows visuels jusqu’à l’exécution durable, l’interaction humaine et la visibilité opérationnelle.", primary: "Découvrir la plateforme", secondary: "Voir sur GitHub", proof: ["Indépendant des fournisseurs", "Cloud optionnel", "Extensible"] },
       problem: { kicker: "Pourquoi Agentstration ?", title: "La vraie difficulté commence après le premier agent fonctionnel.", body: "Les prototypes démarrent vite. Les systèmes réels exigent une configuration stable, des workflows réutilisables, une exécution gouvernée, des espaces pour les utilisateurs et un modèle opérationnel clair. Agentstration fournit cette infrastructure manquante.", stats: [["01", "Définir une fois", "Rendez explicites l’identité, les capacités et la configuration de chaque agent."], ["02", "Composer sereinement", "Reliez les agents par des flows plutôt que par des scripts fragiles."], ["03", "Opérer clairement", "Séparez la gestion de la configuration et l’exécution runtime."]] },
+      runtime: { kicker: "Runtime d’agents", title: "Un plan de contrôle conçu pour exécuter via un véritable runtime d’agents.", body: "Agentstration gouverne les définitions, le travail et l’orchestration. Son Runtime Plane matérialise les agents et délègue leur exécution à un runtime d’agents. L’adaptateur intégré actuellement est Microsoft Agent Framework (MAF), isolé derrière des contrats stables et indépendants des fournisseurs.", label: "Intégration runtime actuelle", name: "Microsoft Agent Framework", points: [["Matérialiser", "Transformer les définitions gouvernées en instances d’agents exécutables."], ["Exécuter", "Lancer les agents via MAF tout en gardant le choix du fournisseur hors du modèle d’orchestration."], ["Observer", "Normaliser cycle de vie, progression et résultats dans Agentstration."]] },
+      providers: { kicker: "Intégrations de fournisseurs de modèles", title: "Changez de modèles sans réécrire vos agents.", body: "Agentstration sépare la connexion au fournisseur, les déploiements de modèles et les profils réutilisables. Les agents référencent un profil gouverné — pas un endpoint ni un secret fournisseur — afin que l’infrastructure évolue indépendamment de l’orchestration.", current: "Disponible aujourd’hui", name: "Ollama", detail: "La première intégration de fournisseur implémentée s’exécute hors processus comme extension AEP, avec découverte des modèles, contrôle de santé, streaming, appels d’outils et suivi de l’usage.", future: "Le contrat AEP Model Provider constitue le point d’extension pour ajouter d’autres fournisseurs locaux ou hébergés.", stages: [["Fournisseur", "Connexion et capacités"], ["Déploiement", "Modèle concret"], ["Profil", "Paramètres gouvernés"], ["Agent", "Définition portable"]] },
       blocks: { kicker: "Briques fondamentales", title: "Un langage commun pour les systèmes agentiques.", body: "Chaque concept a un rôle précis afin que la plateforme reste compréhensible à mesure qu’elle grandit.", items: [["agent", "Agents", "Des unités dédiées avec instructions, capacités et paramètres de fournisseur définis."], ["flow", "Flows", "Une orchestration explicite qui transforme des étapes d’agents en travail reproductible."], ["provider", "Fournisseurs de modèles", "Une couche neutre pour choisir le bon modèle selon le besoin."], ["extension", "Extensions", "Des intégrations par contrat qui étendent la plateforme sans couplage fort."], ["workplace", "Workplace", "L’environnement où les personnes lancent et suivent leur travail."], ["control", "Management & runtime", "Des plans distincts pour la configuration et une exécution fiable."]] },
       local: { kicker: "Local-first par conception", title: "Votre infrastructure est le choix par défaut, pas une porte de sortie.", body: "Exécutez Agentstration au plus près de vos données et outils. Ajoutez des services cloud lorsqu’ils sont utiles, sans plateforme hébergée obligatoire.", points: [["Exécution locale", "Gardez plan de contrôle et workloads là où ils doivent être."], ["Cloud optionnel", "Connectez des capacités hébergées de façon sélective."], ["Choix des fournisseurs", "Associez modèles et workloads sans redessiner le système."], ["Architecture ouverte", "Construisez sur des contrats explicites et des composants remplaçables."]] },
       architecture: { kicker: "L’architecture en un regard", title: "Des frontières claires. Un système cohérent.", body: "Les utilisateurs travaillent dans un Workplace ciblé. Les flows coordonnent les agents. Les agents utilisent fournisseurs de modèles, outils et extensions. Le Management définit le système ; le Runtime l’exécute.", link: "Parcourir l’architecture" },
-      extensions: { kicker: "Architecture d’extension", title: "Intégrer par contrat, sans couplage caché.", body: "Agentstration évolue vers AEP — Agentstration Extension Protocol — afin que les extensions vivent hors du processus principal et communiquent par un contrat défini. AEP évolue encore, mais la direction est claire : des frontières plus sûres, un choix technologique plus large et des cycles de vie indépendants.", link: "Découvrir le modèle d’extension" },
-      preview: { kicker: "Surfaces produit", title: "Une plateforme, deux expériences ciblées.", body: "La Console permet aux opérateurs de façonner le système. Le Workplace offre à chacun un espace clair pour accomplir son travail.", cards: [["Console", "Configurer agents, flows, fournisseurs et ressources de la plateforme."], ["Workplace", "Lancer les tâches, suivre leur progression et consulter les résultats."]], placeholder: "Aperçu produit bientôt disponible" }
+      extensions: { kicker: "Architecture d’extension", title: "Intégrer par contrat, sans couplage caché.", body: "AEP — Agentstration Extension Protocol — est le modèle d’extension natif d’Agentstration. Il définit comment la plateforme découvre, connecte et invoque des capacités exécutées hors du processus principal, avec des frontières plus sûres, un choix technologique plus large et des cycles de vie indépendants.", link: "Découvrir le modèle d’extension" },
+      preview: { kicker: "Déjà opérationnel", title: "Une surface produit pour chaque rôle.", body: "Les opérateurs gouvernent la plateforme dans la Console. Les utilisateurs délèguent et suivent le travail dans le Workplace. Les deux reposent sur les mêmes services durables et contrats explicites.", cards: [["Console d’opérations", "Gérer agents, profils de modèles, catalogues d’outils, versions de flows et exécutions runtime."], ["Workplace utilisateur", "Publier des entrées, déléguer le travail, poursuivre les interactions et récupérer les résultats durables."]], placeholder: "Surface produit active" }
     },
     features: {
       title: "Fonctionnalités — Agentstration", description: "Découvrez les briques d’Agentstration pour définir, orchestrer et opérer des systèmes d’agents IA.", hero: ["Capacités de la plateforme", "L’infrastructure nécessaire pour transformer des agents en système.", "Des briques ciblées rendent la configuration explicite, l’orchestration réutilisable et l’exploitation compréhensible — d’une machine locale à un environnement distribué."],
-      groups: [["Définir", "Modéliser le système avec intention", "Remplacez prompts épars et code de liaison par des concepts de plateforme durables.", [["Agents", "Formalisez objectif, instructions et capacités dans une ressource gérable."], ["Fournisseurs", "Séparez le choix du modèle du travail réalisé par l’agent."], ["Ressources", "Donnez à la configuration un emplacement et un cycle de vie clairs."]]], ["Orchestrer", "Transformer le comportement en flows reproductibles", "Composez le travail visiblement pour éviter que les résultats complexes dépendent d’un code opaque.", [["Flows", "Coordonnez les étapes des agents par des définitions explicites et réutilisables."], ["Entrées et résultats", "Créez un chemin cohérent de la demande au résultat inspectable."], ["Frontières", "Séparez orchestration et implémentation de l’agent."]]], ["Opérer", "Management et runtime, chacun avec son rôle", "Faites évoluer la plateforme sans confondre configuration et exécution.", [["Plan de management", "Définissez, validez et gouvernez l’état désiré du système."], ["Plan runtime", "Exécutez le travail via des contrats runtime stables."], ["Workplace", "Exposez les workflows utiles sans la complexité opérationnelle."]]], ["Étendre", "Connecter sans sacrifier l’architecture", "Évoluez une capacité à la fois grâce aux contrats de fournisseurs et d’extensions.", [["Indépendance fournisseur", "Choisissez et changez de fournisseur IA à la frontière de la plateforme."], ["Direction AEP", "Déportez les extensions hors processus derrière un protocole explicite."], ["Composition ouverte", "Intégrez outils et services à des points dédiés."]]]],
+      groups: [["Définir", "Modéliser le système avec intention", "Remplacez prompts épars et code de liaison par des concepts de plateforme durables.", [["Agents", "Formalisez objectif, instructions et capacités dans une ressource gérable."], ["Fournisseurs", "Séparez le choix du modèle du travail réalisé par l’agent."], ["Ressources", "Donnez à la configuration un emplacement et un cycle de vie clairs."]]], ["Orchestrer", "Transformer le comportement en flows reproductibles", "Composez le travail visiblement pour éviter que les résultats complexes dépendent d’un code opaque.", [["Flows", "Coordonnez les étapes des agents par des définitions explicites et réutilisables."], ["Entrées et résultats", "Créez un chemin cohérent de la demande au résultat inspectable."], ["Frontières", "Séparez orchestration et implémentation de l’agent."]]], ["Opérer", "Management et runtime, chacun avec son rôle", "Faites évoluer la plateforme sans confondre configuration et exécution.", [["Plan de management", "Définissez, validez et gouvernez l’état désiré du système."], ["Plan runtime", "Exécutez le travail via des contrats runtime stables."], ["Workplace", "Exposez les workflows utiles sans la complexité opérationnelle."]]], ["Étendre", "Connecter sans sacrifier l’architecture", "Évoluez une capacité à la fois grâce aux contrats de fournisseurs et d’extensions.", [["Indépendance fournisseur", "Choisissez et changez de fournisseur IA à la frontière de la plateforme."], ["Modèle d’extension AEP", "Connectez les extensions hors processus grâce au protocole natif d’Agentstration."], ["Composition ouverte", "Intégrez outils et services à des points dédiés."]]]],
       principles: ["Exécution local-first", "Services cloud optionnels", "Concepts simples et explicites", "Surfaces humaines et machine", "Fournisseurs remplaçables", "Intégrations par contrat"]
     },
     architecture: {
-      title: "Architecture — Agentstration", description: "Comprenez les plans de management, runtime et workplace de l’architecture ouverte d’Agentstration.", hero: ["Architecture système", "Une structure pour les agents qui opèrent dans le monde réel.", "Agentstration sépare la définition d’un système, l’expérience du travail et son exécution — tout en reliant chaque plan par des contrats explicites."],
-      planes: [["Plan de management", "Définir le système désiré", "Créez et gouvernez agents, flows, fournisseurs, extensions et leurs relations."], ["Plan d’expérience", "Rendre les capacités utilisables", "Le Workplace transforme les définitions de plateforme en environnement de travail clair."], ["Plan runtime", "Exécuter un travail fiable", "Résolvez les définitions, coordonnez les flows et exécutez les agents avec fournisseurs, outils et extensions."]],
+      title: "Architecture — Agentstration", description: "Comprenez les frontières Management, Work, Flow et Runtime de l’architecture ouverte d’Agentstration.", hero: ["Architecture système", "Une structure pour les agents qui opèrent dans le monde réel.", "Agentstration sépare gouvernance, travail délégué, orchestration et exécution — puis les relie par des contrats explicites et indépendants des fournisseurs."],
+      planes: [["Plan de management", "Gouverner le système désiré", "Centralise et gouverne les agents déclaratifs, profils de modèles, catalogues d’outils, déploiements et règles d’accès."], ["Plan de travail", "Suivre le travail délégué", "Gère le cycle de vie des Work Items, interactions, tâches, résultats et artefacts durables accessibles dans le Workplace."], ["Plan de flow", "Orchestrer visiblement", "Transforme les graphes éditables en versions publiées immuables et Flow Runs observables."], ["Plan runtime", "Exécuter via un runtime d’agents", "Matérialise et exécute les agents grâce à l’adaptateur Microsoft Agent Framework actuel, derrière des contrats stables."]],
       flow: [["Utilisateurs", "Initient le travail et utilisent les résultats"], ["Workplace", "Présente tâches disponibles et progression"], ["Flows", "Coordonnent la séquence du travail"], ["Agents", "Appliquent instructions et capacités"], ["Fournisseurs · Outils · Extensions", "Apportent modèles et capacités externes"]],
-      boundaries: [["Définitions avant instances", "Le Management décrit ce qui doit exister ; le Runtime résout les besoins d’une tâche."], ["Contrats avant internes", "Les plans communiquent par des interfaces intentionnelles, sans connaître leur implémentation."], ["Local avant cloud obligatoire", "L’architecture fonctionne localement et adopte les services distants au besoin."], ["Évolution avant verrouillage", "Fournisseurs et extensions changent sans transformer toute la plateforme."]]
+      boundaries: [["Des ressources déclaratives", "Le Management gouverne des définitions durables ; le Runtime ne les matérialise qu’au moment d’exécuter le travail."], ["Des frontières explicites", "Les plans échangent par des contrats stables afin d’évoluer sans dépendre de leurs implémentations internes."], ["Local-first, cloud au choix", "Exécutez le plan de contrôle au plus près de vos données et ajoutez des services distants seulement lorsqu’ils sont utiles."], ["Des composants remplaçables", "Runtime, fournisseurs de modèles et extensions AEP peuvent évoluer sans redessiner l’orchestration."]]
     },
     extensions: {
-      title: "Extensions — Agentstration", description: "Découvrez l’architecture d’extension par contrat d’Agentstration et la direction AEP.", hero: ["Modèle d’extension ouvert", "Les capacités doivent se connecter proprement — et évoluer indépendamment.", "Agentstration est conçu pour des extensions qui communiquent par contrats définis, restent hors du processus central et choisissent les technologies adaptées à leur rôle."],
-      why: [["Isolation des processus", "La défaillance d’une extension ne devrait pas devenir celle du plan de contrôle."], ["Cycle de vie indépendant", "Livrez, versionnez et opérez une intégration sans reconstruire la plateforme."], ["Liberté technologique", "Implémentez les capacités dans l’écosystème qui leur convient."], ["Contrats découvrables", "Rendez explicites les opérations prises en charge et la compatibilité."]],
-      aep: { title: "AEP est une direction, pas un standard figé trop tôt.", body: "L’Agentstration Extension Protocol est le contrat émergent entre la plateforme et les extensions externes. Sa forme publique évolue encore. L’objectif est une interopérabilité stable : découverte des capacités, invocation, signaux de cycle de vie et frontières opérationnelles utiles, sans chargement arbitraire de plugins dans le processus.", stages: [["Découvrir", "Une extension décrit identité, version et capacités."], ["Connecter", "La plateforme établit un canal conscient du contrat."], ["Invoquer", "Le runtime appelle une capacité déclarée avec une entrée structurée."], ["Observer", "Résultats, erreurs et santé restent visibles à travers la frontière."]] },
-      compare: [["Plugin en processus", "Partage mémoire et domaine de défaillance", "Souvent lié à un runtime", "Redémarrage de la plateforme souvent requis"], ["Extension par contrat", "S’exécute derrière une frontière de processus", "Technologie d’implémentation libre", "Évolue selon son propre cycle de vie"]]
+      title: "Extensions — Agentstration", description: "Découvrez AEP, le modèle d’extension natif d’Agentstration fondé sur des contrats explicites.", hero: ["Modèle d’extension natif", "Les capacités se connectent proprement — et évoluent indépendamment.", "AEP — Agentstration Extension Protocol — est le modèle d’extension natif d’Agentstration. Il définit comment la plateforme découvre, connecte et invoque des capacités exécutées hors de son processus principal. Chaque extension conserve ainsi sa technologie, son cycle de vie et sa propre frontière de défaillance."],
+      capabilities: [["Fournisseurs de modèles", "Connectez des runtimes de modèles locaux ou hébergés par un même contrat, avec découverte des modèles, chat, streaming et capacités déclarées."], ["Outils", "Exposez des outils et leurs schémas à Agentstration. Les contributions AEP peuvent s’appuyer sur MCP pour leur découverte et leur invocation."], ["Configuration", "Publiez des schémas de configuration versionnés et leurs annotations de secrets, sans coder les champs propres à chaque fournisseur dans la plateforme."], ["Capacités spécialisées", "Ajoutez des capacités métier nommées hors du processus principal et faites-les évoluer selon leur propre cycle de vie."]],
+      aep: { title: "AEP est le modèle d’extension d’Agentstration.", body: "L’Agentstration Extension Protocol définit le contrat natif entre la plateforme et ses processus d’extension. Il fournit à Agentstration une manière cohérente de découvrir les capacités, de les invoquer et d’observer leur cycle de vie, sans charger arbitrairement des plugins dans le processus central.", stages: [["Découvrir", "Une extension décrit son identité, sa version et ses capacités."], ["Connecter", "Agentstration établit la communication avec l’extension selon le contrat AEP."], ["Invoquer", "Le runtime appelle une capacité déclarée avec une entrée structurée."], ["Observer", "Résultats, erreurs et état de santé restent visibles à travers la frontière."]] }
+    },
+    packs: {
+      title: "Galerie de packs — Agentstration",
+      description: "Découvrez les Packs Agentstration officiels et versionnés pour orchestrer des usages personnels et professionnels.",
+      hero: ["Catalogue de packs officiels", "Partez d’une orchestration à inspecter, exécuter et adapter.", "Les Packs regroupent agents déclaratifs, flows et ressources associées dans des expériences versionnées et installables. La galerie officielle est actuellement portée par le dépôt Agentstration Packs."],
+      gallery: { kicker: "10 exemples officiels · 5 stratégies d’orchestration", title: "Choisissez un point de départ, pas une page blanche.", body: "Parcourez le catalogue actuel par audience. Chaque carte mène vers sa source versionnée dans le dépôt officiel.", all: "Tous les packs", personal: "Personnel", professional: "Professionnel", resources: "ressources", view: "Voir le pack", repository: "Ouvrir le dépôt des packs", source: "Catalogue adossé à Git" },
+      items: packCatalog.map(pack => ({ ...pack, description: pack.description.fr }))
     }
   }
 };
