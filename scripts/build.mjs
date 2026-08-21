@@ -35,7 +35,7 @@ function head(lang, page, c) {
   const url = `${site.origin}${pathFor(lang, page)}`;
   const alternate = lang === "en" ? "fr" : "en";
   return `<!doctype html>
-<html lang="${lang}" data-theme="system">
+<html lang="${lang}" data-theme="system" data-analytics-id="${site.analyticsMeasurementId}">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -90,7 +90,7 @@ function header(lang, page, c) {
   <div class="container nav-shell">
     <a class="brand header-brand" href="${pathFor(lang, "home")}" aria-label="Agentstration — ${c.nav.home}">${headerBrand()}</a>
     <nav class="desktop-nav" aria-label="${c.navLabel}">
-      ${site.pages.map(key => `<a href="${pathFor(lang, key)}"${key === page ? ' aria-current="page"' : ""}>${c.nav[key]}</a>`).join("")}
+      ${site.navigation.map(key => `<a href="${pathFor(lang, key)}"${key === page ? ' aria-current="page"' : ""}>${c.nav[key]}</a>`).join("")}
     </nav>
     <div class="nav-actions">
       <a class="icon-button header-github-link" href="${site.externalLinks.github}" target="_blank" rel="noreferrer" aria-label="${lang === "fr" ? "Voir Agentstration sur GitHub" : "View Agentstration on GitHub"}">
@@ -104,7 +104,7 @@ function header(lang, page, c) {
     </div>
   </div>
   <nav class="mobile-nav" id="mobile-menu" data-mobile-menu aria-label="${c.navLabel}" hidden>
-    ${site.pages.map(key => `<a href="${pathFor(lang, key)}"${key === page ? ' aria-current="page"' : ""}>${c.nav[key]}</a>`).join("")}
+    ${site.navigation.map(key => `<a href="${pathFor(lang, key)}"${key === page ? ' aria-current="page"' : ""}>${c.nav[key]}</a>`).join("")}
   </nav>
 </header>
 <aside class="alpha-banner" aria-label="${lang === "fr" ? "Statut du projet" : "Project status"}">
@@ -119,11 +119,15 @@ function footer(lang, c) {
   return `<footer class="site-footer">
   <div class="container footer-grid">
     <div><a class="footer-brand" href="${pathFor(lang, "home")}" aria-label="Agentstration — ${c.nav.home}">${footerBrand()}</a><p>${c.footer.statement}</p></div>
-    <div><h2>${c.footer.product}</h2>${site.pages.slice(1).map(key => `<a href="${pathFor(lang, key)}">${c.nav[key]}</a>`).join("")}</div>
-    <div><h2>${c.footer.resources}</h2>${linkOrDisabled(site.externalLinks.docs, c.footer.documentation, c.footer.comingSoon, "footer-link")}${linkOrDisabled(site.externalLinks.github, c.footer.github, c.footer.comingSoon, "footer-link")}${linkOrDisabled(site.externalLinks.packs, c.footer.packs, c.footer.comingSoon, "footer-link")}</div>
+    <div><h2>${c.footer.product}</h2>${site.navigation.slice(1).map(key => `<a href="${pathFor(lang, key)}">${c.nav[key]}</a>`).join("")}</div>
+    <div><h2>${c.footer.resources}</h2>${linkOrDisabled(site.externalLinks.docs, c.footer.documentation, c.footer.comingSoon, "footer-link")}${linkOrDisabled(site.externalLinks.github, c.footer.github, c.footer.comingSoon, "footer-link")}${linkOrDisabled(site.externalLinks.packs, c.footer.packs, c.footer.comingSoon, "footer-link")}<a class="footer-link" href="${pathFor(lang, "privacy")}">${c.footer.privacy}</a><button class="footer-link cookie-settings" type="button" data-consent-manage>${c.footer.cookies}</button></div>
   </div>
   <div class="container footer-bottom"><span>© ${new Date().getFullYear()} Agentstration. ${c.footer.legal}</span><span>${c.footer.built}</span></div>
 </footer>
+<aside class="consent-banner" data-consent-banner role="dialog" aria-labelledby="consent-title" hidden>
+  <div class="consent-copy"><strong id="consent-title">${c.consent.title}</strong><p>${c.consent.body}</p><a href="${pathFor(lang, "privacy")}">${c.consent.learnMore}<span aria-hidden="true">→</span></a></div>
+  <div class="consent-actions"><button class="button secondary" type="button" data-consent-reject>${c.consent.reject}</button><button class="button secondary" type="button" data-consent-accept>${c.consent.accept}</button></div>
+</aside>
 </body>
 </html>`;
 }
@@ -269,9 +273,15 @@ function renderPacks(lang, c) {
   </div></section><section class="section pack-authoring-section"><div class="container"><div class="section-heading split"><div><p class="eyebrow">${c.authoring.kicker}</p><h2>${c.authoring.title}</h2></div><p>${c.authoring.body}</p></div><div class="pack-authoring-grid">${c.authoring.items.map(item => `<article class="pack-authoring-card reveal"><span class="icon-box">${icon(item[0])}</span><h3>${item[1]}</h3><p>${item[2]}</p></article>`).join("")}</div></div></section>${cta(lang, c)}</main>`;
 }
 
+function renderPrivacy(lang, c) {
+  return `<main id="main">${pageHero(c.hero)}
+  <section class="section privacy-section"><div class="container narrow"><div class="privacy-list">${c.sections.map((section, index) => `<article><span>${String(index + 1).padStart(2, "0")}</span><div><h2>${section[0]}</h2><p>${section[1]}</p>${index === 2 ? `<a class="arrow-link" href="https://policies.google.com/privacy" target="_blank" rel="noreferrer">${c.googleLink}<span>↗</span></a>` : index === 4 ? `<a class="arrow-link" href="${site.externalLinks.github}" target="_blank" rel="noreferrer">${c.contactLink}<span>↗</span></a>` : ""}</div></article>`).join("")}</div></div></section>
+  </main>`;
+}
+
 function renderPage(lang, page) {
   const c = getContent(lang, page);
-  const body = page === "home" ? renderHome(lang, c) : page === "features" ? renderFeatures(lang, c) : page === "workplace" ? renderWorkplace(lang, c) : page === "architecture" ? renderArchitecture(lang, c) : page === "extensions" ? renderExtensions(lang, c) : renderPacks(lang, c);
+  const body = page === "home" ? renderHome(lang, c) : page === "features" ? renderFeatures(lang, c) : page === "workplace" ? renderWorkplace(lang, c) : page === "architecture" ? renderArchitecture(lang, c) : page === "extensions" ? renderExtensions(lang, c) : page === "packs" ? renderPacks(lang, c) : renderPrivacy(lang, c);
   return `${head(lang, page, c)}${header(lang, page, c)}${body}${footer(lang, c)}`;
 }
 

@@ -35,7 +35,7 @@ The site is built and served at <http://localhost:4173/en/>. The development ser
 npm run build
 ```
 
-The command recreates `dist/`, generates eight localized HTML pages, copies public assets, and writes the sitemap. Deploy the contents of `dist/` to any static host.
+The command recreates `dist/`, generates the localized HTML pages, copies public assets, and writes the sitemap. Deploy the contents of `dist/` to any static host.
 
 Run the build and internal-link validation together with:
 
@@ -88,6 +88,8 @@ Each page is generated at an explicit, indexable URL in both languages:
 | `/en/features/` | `/fr/features/` |
 | `/en/architecture/` | `/fr/architecture/` |
 | `/en/extensions/` | `/fr/extensions/` |
+| `/en/packs/` | `/fr/packs/` |
+| `/en/privacy/` | `/fr/privacy/` |
 
 All localized copy and metadata live in `src/content/site.mjs`. Shared navigation, footer and CTA strings live by language; page content is grouped by language and page key. The language switch preserves the current page.
 
@@ -112,4 +114,4 @@ Documentation and GitHub links are centralized in `site.externalLinks` in `src/c
 
 Generated pages include unique titles/descriptions, canonical URLs, OpenGraph/Twitter metadata, `lang`, `hreflang` (including `x-default`), semantic landmarks, sitemap and robots directives. UI controls expose state and labels, focus is visible, content remains available without JavaScript, and reduced-motion preferences are respected.
 
-The site uses no external fonts, libraries, trackers or runtime network requests. Light and dark themes are centralized through CSS custom properties and default to the operating-system preference.
+The site uses no external fonts or runtime libraries. Google Analytics is strictly consent-gated: its script is not requested and no analytics cookie is created until a visitor explicitly accepts audience measurement. The bilingual privacy page explains the processing, and the footer lets visitors change or withdraw their choice. Light and dark themes are centralized through CSS custom properties and default to the operating-system preference.

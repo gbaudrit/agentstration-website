@@ -1,14 +1,17 @@
 export const site = {
   origin: "https://www.agentstrations.io",
+  analyticsMeasurementId: "G-J03WSTZ19R",
   languages: ["en", "fr"],
-  pages: ["home", "features", "workplace", "architecture", "extensions", "packs"],
+  pages: ["home", "features", "workplace", "architecture", "extensions", "packs", "privacy"],
+  navigation: ["home", "features", "workplace", "architecture", "extensions", "packs"],
   paths: {
     home: "",
     features: "features",
     workplace: "workplace",
     architecture: "architecture",
     extensions: "extensions",
-    packs: "packs"
+    packs: "packs",
+    privacy: "privacy"
   },
   externalLinks: {
     github: "https://github.com/gbaudrit/agentstration",
@@ -30,7 +33,7 @@ const shared = {
     languageLabel: "View this page in French",
     theme: "Change color theme",
     eyebrow: "Open agent control plane",
-    nav: { home: "Home", features: "Features", workplace: "Workplace", architecture: "Architecture", extensions: "Extensions", packs: "Packs" },
+    nav: { home: "Home", features: "Features", workplace: "Workplace", architecture: "Architecture", extensions: "Extensions", packs: "Packs", privacy: "Privacy" },
     footer: {
       statement: "A control plane to define, orchestrate and operate AI agent systems.",
       product: "Product",
@@ -40,7 +43,16 @@ const shared = {
       packs: "Packs repository",
       comingSoon: "Coming soon",
       legal: "Agentstration is an evolving open platform.",
-      built: "Designed for local-first, provider-independent systems."
+      built: "Designed for local-first, provider-independent systems.",
+      privacy: "Privacy",
+      cookies: "Manage analytics cookies"
+    },
+    consent: {
+      title: "Help us improve Agentstration",
+      body: "With your permission, we use Google Analytics to understand how this website is used. Analytics stays off until you accept.",
+      accept: "Accept analytics",
+      reject: "Reject analytics",
+      learnMore: "Read the privacy notice"
     },
     cta: {
       eyebrow: "Build the system around your agents",
@@ -69,7 +81,7 @@ const shared = {
     languageLabel: "Afficher cette page en anglais",
     theme: "Changer de thème",
     eyebrow: "Plan de contrôle ouvert pour agents",
-    nav: { home: "Accueil", features: "Fonctionnalités", workplace: "Workplace", architecture: "Architecture", extensions: "Extensions", packs: "Packs" },
+    nav: { home: "Accueil", features: "Fonctionnalités", workplace: "Workplace", architecture: "Architecture", extensions: "Extensions", packs: "Packs", privacy: "Confidentialité" },
     footer: {
       statement: "Un plan de contrôle pour définir, orchestrer et opérer des systèmes d’agents IA.",
       product: "Produit",
@@ -79,7 +91,16 @@ const shared = {
       packs: "Dépôt des packs",
       comingSoon: "Bientôt disponible",
       legal: "Agentstration est une plateforme ouverte en évolution.",
-      built: "Pensée pour des systèmes local-first et indépendants des fournisseurs."
+      built: "Pensée pour des systèmes local-first et indépendants des fournisseurs.",
+      privacy: "Confidentialité",
+      cookies: "Gérer les cookies de mesure d’audience"
+    },
+    consent: {
+      title: "Aidez-nous à améliorer Agentstration",
+      body: "Avec votre accord, nous utilisons Google Analytics pour comprendre l’utilisation de ce site. La mesure d’audience reste désactivée tant que vous n’avez pas accepté.",
+      accept: "Accepter la mesure",
+      reject: "Refuser la mesure",
+      learnMore: "Lire la politique de confidentialité"
     },
     cta: {
       eyebrow: "Construisez le système autour de vos agents",
@@ -251,6 +272,20 @@ const pages = {
       gallery: { kicker: "10 official samples · 5 orchestration strategies", title: "Choose a starting point, not a blank page.", body: "Browse the current catalog by audience. Every card links to its versioned source in the official repository.", all: "All packs", personal: "Personal", professional: "Professional", resources: "resources", view: "View pack", repository: "Open the packs repository", source: "Git-backed catalog" },
       authoring: { kicker: "From catalog to your own Pack", title: "Install, compose and adapt without starting over.", body: "Use a Pack as-is or compose one from the agents, flows, model profiles and resources already governed in a Workspace.", items: [["extension", "Install", "Bring a versioned Pack into a Workspace with explicit resource bindings."], ["control", "Compose", "Select the governed resources that belong together in a reusable experience."], ["flow", "Adapt", "Fork a Pack, evolve it in isolation and rebuild your own version deterministically."]] },
       items: packCatalog.map(pack => ({ ...pack, description: pack.description.en }))
+    },
+    privacy: {
+      title: "Privacy — Agentstration",
+      description: "Learn how the Agentstration website handles analytics consent and visitor data.",
+      hero: ["Privacy", "Your choice comes before audience measurement.", "The Agentstration website only activates Google Analytics after you explicitly accept it. You can refuse or change your choice at any time."],
+      sections: [
+        ["What we measure", "If you consent, Google Analytics records audience and navigation information such as viewed pages, approximate location, device and browser characteristics, and interaction events. We do not ask Google Analytics to collect the content of forms, conversations or Agentstration workloads."],
+        ["Why we use it", "These statistics help us understand which public pages are useful, detect navigation problems and improve the website. The legal basis for this optional processing is your consent."],
+        ["Google Analytics", "The audience measurement service is provided by Google. Its use may involve cookies and the processing of data by Google outside the European Economic Area under the safeguards described in Google’s own privacy documentation."],
+        ["Your choice", "Analytics is disabled by default. Accepting or rejecting stores only your preference in this browser for up to six months. Use “Manage analytics cookies” in the footer to change it. Withdrawing consent disables further measurement from this website and removes the Google Analytics cookies accessible to it."],
+        ["Contact", "For a question about this website or its use of audience measurement, contact the Agentstration maintainers through the public GitHub repository."]
+      ],
+      googleLink: "Google privacy and terms",
+      contactLink: "Agentstration on GitHub"
     }
   },
   fr: {
@@ -303,6 +338,20 @@ const pages = {
       gallery: { kicker: "10 exemples officiels · 5 stratégies d’orchestration", title: "Choisissez un point de départ, pas une page blanche.", body: "Parcourez le catalogue actuel par audience. Chaque carte mène vers sa source versionnée dans le dépôt officiel.", all: "Tous les packs", personal: "Personnel", professional: "Professionnel", resources: "ressources", view: "Voir le pack", repository: "Ouvrir le dépôt des packs", source: "Catalogue adossé à Git" },
       authoring: { kicker: "Du catalogue à votre propre Pack", title: "Installez, composez et adaptez sans repartir de zéro.", body: "Utilisez un Pack tel quel ou composez-en un à partir des agents, flows, profils de modèles et ressources déjà gouvernés dans un Workspace.", items: [["extension", "Installer", "Intégrez un Pack versionné dans un Workspace avec des liaisons de ressources explicites."], ["control", "Composer", "Sélectionnez les ressources gouvernées qui forment ensemble une expérience réutilisable."], ["flow", "Adapter", "Forkez un Pack, faites-le évoluer de façon isolée puis reconstruisez votre propre version de manière déterministe."]] },
       items: packCatalog.map(pack => ({ ...pack, description: pack.description.fr }))
+    },
+    privacy: {
+      title: "Confidentialité — Agentstration",
+      description: "Découvrez comment le site Agentstration gère le consentement à la mesure d’audience et les données des visiteurs.",
+      hero: ["Confidentialité", "Votre choix précède toujours la mesure d’audience.", "Le site Agentstration n’active Google Analytics qu’après votre accord explicite. Vous pouvez refuser ou modifier votre choix à tout moment."],
+      sections: [
+        ["Données mesurées", "Si vous y consentez, Google Analytics collecte des informations d’audience et de navigation telles que les pages consultées, la localisation approximative, les caractéristiques de l’appareil et du navigateur ainsi que des événements d’interaction. Nous ne demandons pas à Google Analytics de collecter le contenu de formulaires, de conversations ou de workloads Agentstration."],
+        ["Finalité", "Ces statistiques nous aident à comprendre quelles pages publiques sont utiles, à détecter les difficultés de navigation et à améliorer le site. La base légale de ce traitement facultatif est votre consentement."],
+        ["Google Analytics", "Le service de mesure d’audience est fourni par Google. Son utilisation peut impliquer des cookies et le traitement de données par Google en dehors de l’Espace économique européen, selon les garanties décrites dans la documentation de confidentialité de Google."],
+        ["Votre choix", "La mesure d’audience est désactivée par défaut. Accepter ou refuser enregistre uniquement votre préférence dans ce navigateur pour une durée maximale de six mois. Utilisez « Gérer les cookies de mesure d’audience » dans le pied de page pour la modifier. Le retrait du consentement désactive les mesures suivantes depuis ce site et supprime les cookies Google Analytics auxquels il peut accéder."],
+        ["Contact", "Pour toute question concernant ce site ou sa mesure d’audience, contactez les mainteneurs d’Agentstration depuis le dépôt GitHub public."]
+      ],
+      googleLink: "Règles de confidentialité de Google",
+      contactLink: "Agentstration sur GitHub"
     }
   }
 };
