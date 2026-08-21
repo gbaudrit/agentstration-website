@@ -43,6 +43,23 @@ Run the build and internal-link validation together with:
 npm run check
 ```
 
+## Deployment
+
+The production site is deployed to GitHub Pages by `.github/workflows/deploy-pages.yml`.
+Every push to `main` validates the site, builds `dist/`, and deploys the generated files.
+The workflow can also be started manually from the repository's **Actions** tab.
+
+One-time setup:
+
+1. In the GitHub repository, open **Settings > Pages** and select **GitHub Actions** as the source.
+2. Set `www.agentstrations.io` as the custom domain and enable **Enforce HTTPS** once its certificate is available.
+3. In the OVH DNS zone, point the apex domain to GitHub Pages with these four `A` records:
+   `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, and `185.199.111.153`.
+4. Point `www` to `gbaudrit.github.io` with a `CNAME` record.
+
+DNS propagation and HTTPS certificate issuance can take some time. The `public/CNAME` file keeps
+the custom domain in the generated deployment artifact.
+
 ## Repository structure
 
 ```text

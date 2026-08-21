@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://agentstration.io/sitemap.xml
+Sitemap: https://www.agentstrations.io/sitemap.xml
