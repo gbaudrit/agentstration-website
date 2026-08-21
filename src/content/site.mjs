@@ -14,6 +14,7 @@ export const site = {
     github: "https://github.com/gbaudrit/agentstration",
     docs: "https://github.com/gbaudrit/agentstration/tree/main/docs",
     maf: "https://learn.microsoft.com/en-us/agent-framework/",
+    dotnet: "https://dotnet.microsoft.com/",
     packs: "https://github.com/gbaudrit/agentstration-packs"
   }
 };
@@ -31,7 +32,7 @@ const shared = {
     eyebrow: "Open agent control plane",
     nav: { home: "Home", features: "Features", workplace: "Workplace", architecture: "Architecture", extensions: "Extensions", packs: "Packs" },
     footer: {
-      statement: "An open control plane for building and operating AI agent systems.",
+      statement: "A control plane to define, orchestrate and operate AI agent systems.",
       product: "Product",
       resources: "Resources",
       documentation: "Documentation",
@@ -61,7 +62,7 @@ const shared = {
     eyebrow: "Plan de contrôle ouvert pour agents",
     nav: { home: "Accueil", features: "Fonctionnalités", workplace: "Workplace", architecture: "Architecture", extensions: "Extensions", packs: "Packs" },
     footer: {
-      statement: "Un plan de contrôle ouvert pour construire et opérer des systèmes d’agents IA.",
+      statement: "Un plan de contrôle pour définir, orchestrer et opérer des systèmes d’agents IA.",
       product: "Produit",
       resources: "Ressources",
       documentation: "Documentation",
@@ -100,7 +101,7 @@ const pages = {
       title: "Agentstration — The control plane for AI agents",
       description: "Define, orchestrate and operate AI agents and workflows with an open, local-first control plane.",
       hero: {
-        kicker: "Open source · Self-hosted · Built on .NET",
+        kicker: "Open source · Self-hosted",
         title: "Govern. Orchestrate. <em>Run.</em>",
         body: "Agentstration lets you declare agents and model profiles, compose them into versioned visual flows, distribute reusable Packs, then execute and track delegated work from the Console and Workplace. Agent execution currently runs through Microsoft Agent Framework.",
         primary: "See what Agentstration can do",
@@ -238,7 +239,7 @@ const pages = {
     home: {
       title: "Agentstration — Le plan de contrôle pour agents IA",
       description: "Définissez, orchestrez et opérez agents IA et workflows grâce à un plan de contrôle ouvert et local-first.",
-      hero: { kicker: "Open source · Auto-hébergé · Construit sur .NET", title: "Gouvernez. Orchestrez. <em>Exécutez.</em>", body: "Agentstration permet de déclarer des agents et leurs profils de modèles, de les composer dans des flows visuels versionnés, de distribuer des Packs réutilisables, puis d’exécuter et suivre le travail délégué depuis la Console et le Workplace. L’exécution des agents repose aujourd’hui sur Microsoft Agent Framework.", primary: "Voir ce que permet Agentstration", secondary: "Voir sur GitHub", proof: ["Indépendant des fournisseurs", "Cloud optionnel", "Extensible"] },
+      hero: { kicker: "Open source · Auto-hébergé", title: "Gouvernez. Orchestrez. <em>Exécutez.</em>", body: "Agentstration permet de déclarer des agents et leurs profils de modèles, de les composer dans des flows visuels versionnés, de distribuer des Packs réutilisables, puis d’exécuter et suivre le travail délégué depuis la Console et le Workplace. L’exécution des agents repose aujourd’hui sur Microsoft Agent Framework.", primary: "Voir ce que permet Agentstration", secondary: "Voir sur GitHub", proof: ["Indépendant des fournisseurs", "Cloud optionnel", "Extensible"] },
       problem: { kicker: "Ce que permet Agentstration", title: "Définir, composer et opérer le travail agentique de bout en bout.", body: "Agentstration couvre tout le parcours, depuis les définitions gouvernées jusqu’au résultat durable remis à l’utilisateur.", stats: [["", "Définir le système", "Créez agents déclaratifs, profils et déploiements de modèles, catalogues d’outils et configurations gouvernées."], ["", "Composer et distribuer", "Assemblez agents et outils dans des flows visuels versionnés, puis partagez des expériences installables sous forme de Packs."], ["", "Exécuter et suivre", "Lancez le travail via MAF, gérez interactions humaines et Work Items durables, puis suivez runs, résultats et erreurs dans la Console et le Workplace."]] },
       experience: { kicker: "De l’orchestration à l’expérience utilisateur", title: "Les Entries transforment agents et flows en services réellement accessibles.", body: "Une Entry est un point d’accès déclaratif publié dans un Workspace. Elle relie une expérience destinée à l’utilisateur à un agent ou à un flow versionné, sans lui exposer le runtime, le fournisseur de modèles ni les détails d’orchestration.", entryLabel: "Entry publiée", entryTitle: "Un point d’accès gouverné", entryBody: "Elle définit la présentation, les données attendues et la cible d’exécution. Le même concept peut se matérialiser dans le Workplace sous la forme d’un prompt, d’un formulaire ou d’une conversation.", presentations: ["Prompt", "Formulaire", "Conversation"], link: "Découvrir le Workplace", journeyLabel: "Ce que vit l’utilisateur", stages: [["workplace", "Disponible dans le Workplace", "Le Workspace organise les Entries comme expériences principales, mises en avant ou standard afin que chacun voie immédiatement ce qu’il peut lancer."], ["control", "Une interaction qui reste en contexte", "L’envoi ouvre une conversation durable qui conserve la demande, les relances et les saisies, choix, confirmations ou approbations nécessaires en cours de route."], ["flow", "Une tâche, puis des résultats utiles", "Lorsqu’une exécution est nécessaire, le Work Item technique devient une Task lisible. Progression, résultats, livrables téléchargeables et notifications restent accessibles dans le Workplace."]] },
       runtime: { kicker: "Runtime d’agents", title: "Un plan de contrôle conçu pour exécuter via un véritable runtime d’agents.", body: "Agentstration gouverne les définitions, le travail et l’orchestration. Son Runtime Plane matérialise les agents et délègue leur exécution à un runtime d’agents. L’adaptateur intégré actuellement est Microsoft Agent Framework (MAF), isolé derrière des contrats stables et indépendants des fournisseurs.", label: "Intégration runtime actuelle", name: "Microsoft Agent Framework", points: [["Matérialiser", "Transformer les définitions gouvernées en instances d’agents exécutables."], ["Exécuter", "Lancer les agents via MAF tout en gardant le choix du fournisseur hors du modèle d’orchestration."], ["Observer", "Normaliser cycle de vie, progression et résultats dans Agentstration."]] },
