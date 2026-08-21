@@ -48,6 +48,15 @@ const shared = {
       body: "Explore the architecture today. Connect to the project as public resources become available.",
       primary: "Explore architecture",
       secondary: "See all features"
+    },
+    flowModes: {
+      kicker: "Flow execution models",
+      title: "From explicit routing to dynamic multi-agent collaboration.",
+      body: "Choose a structured Flow when the application owns the path, or an Orchestration when several agents must cooperate through a dedicated strategy.",
+      structured: { label: "STRUCTURED FLOWS", title: "The application controls the path", body: "Route and process work through a visible, versioned execution model.", items: [["direct", "Direct", "Send the request to one known Agent."], ["routing", "Routing", "Select one Agent from declared destinations. Deterministic selection is available today."], ["workflow", "Workflow", "Run an explicit graph of typed steps, conditions and transitions."]] },
+      orchestration: { label: "MULTI-AGENT ORCHESTRATIONS", title: "Agents collaborate through a strategy", body: "Multi-agent orchestration relies on an agent runtime. Agentstration natively integrates Microsoft Agent Framework (MAF) today to execute these five strategies while preserving one observable FlowRun.", runtime: "NATIVELY INTEGRATED RUNTIME · MICROSOFT AGENT FRAMEWORK", items: [["sequential", "Sequential", "Each Agent enriches the result in declaration order."], ["concurrent", "Concurrent", "Agents work independently from the same initial request."], ["handoff", "Handoff", "The active specialist transfers control through declared routes."], ["group-chat", "Group Chat", "Agents contribute to a bounded shared conversation."], ["magentic", "Magentic", "A dedicated manager adapts the plan and selects the next specialist."]] },
+      note: "Composite Flow is already part of the declarative contract; its execution engine is still in preparation.",
+      link: "Explore all Flow capabilities"
     }
   },
   fr: {
@@ -78,6 +87,15 @@ const shared = {
       body: "Explorez l’architecture dès aujourd’hui. Suivez le projet à mesure que ses ressources publiques arrivent.",
       primary: "Explorer l’architecture",
       secondary: "Voir les fonctionnalités"
+    },
+    flowModes: {
+      kicker: "Modèles d’exécution des Flows",
+      title: "Du routage explicite à la collaboration multi-agent dynamique.",
+      body: "Choisissez un Flow structuré lorsque l’application maîtrise le parcours, ou une Orchestration lorsque plusieurs agents doivent coopérer selon une stratégie dédiée.",
+      structured: { label: "FLOWS STRUCTURÉS", title: "L’application maîtrise le parcours", body: "Routez et traitez le travail dans un modèle d’exécution visible et versionné.", items: [["direct", "Direct", "Confier la demande à un Agent connu."], ["routing", "Routing", "Sélectionner un Agent parmi des destinations déclarées. La sélection déterministe est disponible aujourd’hui."], ["workflow", "Workflow", "Exécuter un graphe explicite d’étapes typées, de conditions et de transitions."]] },
+      orchestration: { label: "ORCHESTRATIONS MULTI-AGENTS", title: "Les agents collaborent selon une stratégie", body: "L’orchestration multi-agent s’appuie sur un runtime d’agents. Agentstration intègre aujourd’hui nativement Microsoft Agent Framework (MAF) pour exécuter ces cinq stratégies tout en conservant un FlowRun unique et observable.", runtime: "RUNTIME INTÉGRÉ NATIVEMENT · MICROSOFT AGENT FRAMEWORK", items: [["sequential", "Sequential", "Chaque Agent enrichit le résultat dans l’ordre déclaré."], ["concurrent", "Concurrent", "Les Agents travaillent indépendamment à partir de la même demande."], ["handoff", "Handoff", "Le spécialiste actif transfère le contrôle par des routes déclarées."], ["group-chat", "Group Chat", "Les Agents contribuent à une conversation partagée et bornée."], ["magentic", "Magentic", "Un manager dédié adapte le plan et choisit le prochain spécialiste."]] },
+      note: "Composite Flow fait déjà partie du contrat déclaratif ; son moteur d’exécution est encore en préparation.",
+      link: "Explorer toutes les capacités des Flows"
     }
   }
 };
