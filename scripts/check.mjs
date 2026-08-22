@@ -14,6 +14,11 @@ for (const file of html) {
   const source = await readFile(file, "utf8");
   if (!/<html lang="(en|fr)"/.test(source)) errors.push(`${file}: missing lang`);
   if (!source.includes("rel=\"canonical\"")) errors.push(`${file}: missing canonical`);
+  if (file !== join(dist, "index.html")) {
+    if (!source.includes('data-analytics-id="G-J03WSTZ19R"')) errors.push(`${file}: missing analytics measurement id`);
+    if (!source.includes("data-consent-banner")) errors.push(`${file}: missing analytics consent controls`);
+    if (source.includes("googletagmanager.com")) errors.push(`${file}: analytics script must not load before consent`);
+  }
   for (const match of source.matchAll(/(?:href|src)="(\/[^"]+)"/g)) {
     const url = match[1].split("#")[0].split("?")[0];
     if (!url || url === "/") continue;
