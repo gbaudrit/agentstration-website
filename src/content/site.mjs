@@ -1,5 +1,5 @@
 export const site = {
-  origin: "https://www.agentstrations.io",
+  origin: "https://www.agentstration.io",
   languages: ["en", "fr"],
   pages: ["home", "features", "workplace", "architecture", "extensions", "packs"],
   paths: {

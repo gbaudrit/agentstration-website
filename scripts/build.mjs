@@ -288,7 +288,7 @@ await cp(join(root, "public"), dist, { recursive: true });
 await mkdir(join(dist, "assets"), { recursive: true });
 await writeFile(join(dist, "assets", "site.css"), await readFile(join(root, "src", "styles", "site.css"), "utf8"));
 await writeFile(join(dist, "assets", "site.js"), await readFile(join(root, "src", "scripts", "site.js"), "utf8"));
-await writeFile(join(dist, "index.html"), '<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>Agentstration</title><link rel="canonical" href="https://www.agentstrations.io/en/"><meta http-equiv="refresh" content="0;url=/en/"><script>location.replace("/en/"+location.search+location.hash)</script></head><body><a href="/en/">Continue to Agentstration</a></body></html>', "utf8");
+await writeFile(join(dist, "index.html"), '<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>Agentstration</title><link rel="canonical" href="https://www.agentstration.io/en/"><meta http-equiv="refresh" content="0;url=/en/"><script>location.replace("/en/"+location.search+location.hash)</script></head><body><a href="/en/">Continue to Agentstration</a></body></html>', "utf8");
 
 const urls = site.languages.flatMap(lang => site.pages.map(page => `  <url><loc>${site.origin}${pathFor(lang,page)}</loc><changefreq>${page === "home" ? "weekly" : "monthly"}</changefreq><priority>${page === "home" ? "1.0" : "0.8"}</priority></url>`)).join("\n");
 await writeFile(join(dist, "sitemap.xml"), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n`, "utf8");
