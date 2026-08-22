@@ -52,7 +52,7 @@ The workflow can also be started manually from the repository's **Actions** tab.
 One-time setup:
 
 1. In the GitHub repository, open **Settings > Pages** and select **GitHub Actions** as the source.
-2. Set `www.agentstrations.io` as the custom domain and enable **Enforce HTTPS** once its certificate is available.
+2. Set `www.agentstration.io` as the custom domain and enable **Enforce HTTPS** once its certificate is available.
 3. In the OVH DNS zone, point the apex domain to GitHub Pages with these four `A` records:
    `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, and `185.199.111.153`.
 4. Point `www` to `gbaudrit.github.io` with a `CNAME` record.
