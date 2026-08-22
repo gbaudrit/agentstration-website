@@ -1,5 +1,5 @@
 export const site = {
-  origin: "https://www.agentstrations.io",
+  origin: "https://www.agentstration.io",
   analyticsMeasurementId: "G-J03WSTZ19R",
   languages: ["en", "fr"],
   pages: ["home", "features", "workplace", "architecture", "extensions", "packs", "privacy"],
